@@ -1,10 +1,17 @@
 const express = require('express');
-
-const { PORT } = require('./configs/serverConfig');
+// const bard = require('./ai-search/bard')
+const { PORT } = require('./config/serverConfig');
 
 
 const app = express();
 app.use(express.json());
+
+// (async () => {
+//     const test = new bard();
+//    await test.initiate();
+//     await test.search('education')
+// })()
+
 
 
 // express server setup

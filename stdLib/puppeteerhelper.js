@@ -4,7 +4,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteerex.use(StealthPlugin())
 const puppeteer = require("puppeteer");
 const utils = require('./utils');
-const logincredentials = require('./stdLib/donain-logins').logincredentials;
+// const logincredentials = require('./stdLib/domain-logins').logincredentials;
 const { executablePath } = require('puppeteer')
  
 module.exports.instantiateBrowser = instantiateBrowser;
@@ -33,7 +33,7 @@ async function instantiateBrowser(pFlag = false, domain, logger, forceHeadless, 
         // executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', 
         // devtools: true,
         // slowMo: 25,
-        headless: forceHeadless || (process.env.NODE_ENV != 'dev' ? true : false),
+        headless: false,//forceHeadless || (process.env.NODE_ENV != 'dev' ? true : false),
         // headless: true,
         // devtools: true,
         // args: proxy ? ["--lang=en-US,en", "--proxy-server=" + proxy] : ["--lang=en-US,en"]
@@ -66,7 +66,7 @@ async function instantiateBrowser(pFlag = false, domain, logger, forceHeadless, 
             console.log('using playwright with headless ', options.headless)
             let playwrightProxyObj = {};
             
-            options.proxy = playwrightProxyObj;
+            // options.proxy = playwrightProxyObj;
             options.args = [
                 '--disable-gpu',
                 '--disable-dev-shm-usage',

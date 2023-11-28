@@ -8,28 +8,28 @@ const request = require('request');
 const rp = require('request-promise');
 const Jimp = require("jimp");
 const archiver = require('archiver');
-const diacritics = require("./diacritics").specialCharacters;
-var DigitalOcean = require('do-wrapper').default,
-  api = new DigitalOcean(`${token}`, [1]);
+// const diacritics = require("./diacritics").specialCharacters;
+// var DigitalOcean = require('do-wrapper').default,
+  // api = new DigitalOcean(`${token}`, [1]);
 // var sendEmailAlert = require('./sendEmailAlert');
-const awsTools = require("./awsResources");
+// const awsTools = require("./awsResources");
 // var isEqual = require('lodash.isequal');
-const s3 = awsTools.s3;
-const ec2 = awsTools.ec2;
+// const s3 = awsTools.s3;
+// const ec2 = awsTools.ec2;
 const {
   createLogger,
   format,
   transports
 } = require('winston');
 var winston = require('winston');
-// var { ElasticsearchTransport } = require('winston-elasticsearch');
-const {
-  Client
-} = require('@elastic/elasticsearch');
-const s3Ops = require("./s3Ops");
-// const pricing_lb = 'productpricecrawler-c5-lb-1737216818.us-east-1.elb.amazonaws.com';
-const pricing_lb = '35.244.240.88';
-const fingerprintservice = require('@bungeetech-npm/bungee-fingerprintservice-npm');
+// // var { ElasticsearchTransport } = require('winston-elasticsearch');
+// const {
+//   Client
+// } = require('@elastic/elasticsearch');
+// const s3Ops = require("./s3Ops");
+// // const pricing_lb = 'productpricecrawler-c5-lb-1737216818.us-east-1.elb.amazonaws.com';
+// const pricing_lb = '35.244.240.88';
+// const fingerprintservice = require('@bungeetech-npm/bungee-fingerprintservice-npm');
 
 // const client = new Client({
 //   maxRetries: 5,
@@ -41,23 +41,23 @@ const fingerprintservice = require('@bungeetech-npm/bungee-fingerprintservice-np
 //     password: 'cvURtkw7TwsxhZ27'
 //   }
 // });
-let new_es_client = new Client({
-  log: 'info',
-  node: "http://crawlerlogs.bungeetech.com:9200",
-  auth: {
-    username: 'elastic',
-    password: '19gmk6Y5oGe5GXvj'
-  }
-});
+// let new_es_client = new Client({
+//   log: 'info',
+//   node: "http://crawlerlogs.bungeetech.com:9200",
+//   auth: {
+//     username: 'elastic',
+//     password: '19gmk6Y5oGe5GXvj'
+//   }
+// });
 
-let new_es_client_test = new Client({
-  log: 'info',
-  node: "http://162.211.76.50:9200",
-  auth: {
-    username: 'elastic',
-    password: '19gmk6Y5oGe5GXvj'
-  }
-});
+// let new_es_client_test = new Client({
+//   log: 'info',
+//   node: "http://162.211.76.50:9200",
+//   auth: {
+//     username: 'elastic',
+//     password: '19gmk6Y5oGe5GXvj'
+//   }
+// });
 
 const {
   combine,
@@ -353,23 +353,23 @@ function winstonLogger(logFileName) {
   return logger;
 }
 
-// function winstonLogger(logFileName) {
-//   return createLogger({
-//     level: 'info',
-//     format: combine(
-//       // label({ label: 'Log' }),
-//       timestamp(),
-//       colorize(),
-//       mFormat,
-//     ),
-//     transports: [
-//       new transports.Console(),
-//       new transports.File({
-//         filename: logFileName
-//       })
-//     ]
-//   });
-// }
+function winstonLogger(logFileName) {
+  return createLogger({
+    level: 'info',
+    format: combine(
+      // label({ label: 'Log' }),
+      timestamp(),
+      colorize(),
+      mFormat,
+    ),
+    transports: [
+      new transports.Console(),
+      new transports.File({
+        filename: logFileName
+      })
+    ]
+  });
+}
 
 function checkDynamoResPropetries(obj, props) {
   let noProps = props.filter((prop) => !obj.hasOwnProperty(prop));
@@ -902,12 +902,12 @@ function zipDOM(zipcode) {
 
 const diacriticsMap = [];
 
-for (let i = 0; i < diacritics.length; i++) {
-  const letters = diacritics[i].letters;
-  for (let j = 0; j < letters.length; j++) {
-    diacriticsMap[letters[j]] = diacritics[i].base;
-  }
-}
+// for (let i = 0; i < diacritics.length; i++) {
+//   const letters = diacritics[i].letters;
+//   for (let j = 0; j < letters.length; j++) {
+//     diacriticsMap[letters[j]] = diacritics[i].base;
+//   }
+// }
 
 function replaceSpecialChars(refinedText) {
   try {
@@ -1150,6 +1150,6 @@ module.exports = {
   calculateCheckSumForUPC,
   clean_pack_size,
   getNumber,
-  pricing_lb,
+  // pricing_lb,
   searchElastic
 }
